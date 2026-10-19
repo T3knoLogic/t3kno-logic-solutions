@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="T3kNo-Logic Solutions — scoped freelance engineering across ICP, Hedera, Shopify, Eliza agents, and creative tech. Catalog, estimate, book a scope." />
+  <title>T3kNo-Logic Solutions</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="toast-container" aria-live="polite"></div>
+
+  <div class="shell no-print">
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <button type="button" class="brand" id="brand-btn" aria-label="T3kNo-Logic Solutions home">
+          <span class="brand-mark" aria-hidden="true">&gt;_</span>
+          <span>
+            <span class="brand-name">T3kNo-Logic Solutions</span>
+            <span class="brand-sub">Robert Schneider · scoped builds</span>
+          </span>
+        </button>
+
+        <nav class="nav-desktop" aria-label="Primary">
+          <button type="button" class="nav-btn is-active" data-tab="catalog">Services</button>
+          <button type="button" class="nav-btn" data-tab="estimator">
+            Scope estimator <span id="cart-badge" class="pill" style="margin-left:0.35rem">0</span>
+          </button>
+        </nav>
+
+        <div class="header-actions">
+          <button type="button" class="btn btn-primary" id="cta-book">Book a scope</button>
+          <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Open menu">☰</button>
+        </div>
+      </div>
+      <div class="mobile-nav" id="mobile-nav">
+        <button type="button" class="nav-btn is-active" data-tab="catalog">Services</button>
+        <button type="button" class="nav-btn" data-tab="estimator">Scope estimator</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-inner">
+          <h1 class="hero-brand">
+            <span>Freelance engineering desk</span>
+            T3kNo-Logic Solutions
+          </h1>
+          <p class="hero-line">Precision scopes for Web3, agents, commerce, and creative systems.</p>
+          <p class="hero-support">
+            Packaged modules across ICP canisters, Hedera HTS, Shopify ops, ElizaOS agents, NFT pipelines, and audio —
+            estimate a stack, then send a brief. Not a product storefront; for Bonsai OS apps see
+            <a href="https://bonsaios.app/" rel="noopener noreferrer">bonsaios.app</a>.
+          </p>
+          <div class="hero-ctas">
+            <button type="button" class="btn btn-primary" id="cta-catalog">Browse services</button>
+            <button type="button" class="btn" id="cta-estimator">Build a custom scope</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="wrap">
+      <div class="meta-bar panel">
+        <div>
+          Showing <strong id="meta-showing">0</strong> of <strong id="meta-total">30</strong> modules ·
+          <strong id="meta-auto">0</strong> auto-pilot ready
+        </div>
+        <div>Estimates are starting points — final SOW after kickoff.</div>
+      </div>
+
+      <section class="proof-strip" aria-label="Shipped work">
+        <h2 class="proof-heading">Shipped in the wild</h2>
+        <div class="proof-grid">
+          <a class="proof-card" href="https://iabi6-zqaaa-aaaau-agwpq-cai.icp0.io/collection/18" rel="noopener noreferrer" target="_blank">
+            <span class="proof-kicker">ICP · NFT Bazaar</span>
+            <strong>Orbit Spots #18</strong>
+            <span>ICRC-7 mint rail live on Bonsai Bazaar — soft-record → mint.</span>
+          </a>
+          <a class="proof-card" href="https://t3kno-logic.xyz/" rel="noopener noreferrer" target="_blank">
+            <span class="proof-kicker">Shopify · RWA</span>
+            <strong>Enchanted Bonsai Merch</strong>
+            <span>Physical drops + Principal ID airdrop path on t3kno-logic.xyz.</span>
+          </a>
+          <a class="proof-card" href="https://bonsaios.app/" rel="noopener noreferrer" target="_blank">
+            <span class="proof-kicker">Bonsai OS</span>
+            <strong>Suite on ICP</strong>
+            <span>Registry, Cloud, Radio, Works, Canopy — sovereign product surface.</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Catalog -->
+      <section id="tab-catalog" class="tab-panel is-active" aria-label="Service catalog">
+        <div class="package-bar panel" id="package-bar"></div>
+        <div class="toolbar panel">
+          <div class="search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" />
+            </svg>
+            <label class="sr-only" for="service-search">Search services</label>
+            <input type="search" id="service-search" placeholder="Search services, stack, keywords…" autocomplete="off" />
+          </div>
+          <div class="cat-filters" id="cat-filters" role="tablist" aria-label="Categories"></div>
+          <label class="toggle">
+            <input type="checkbox" id="autopilot-toggle" />
+            Auto-pilot only
+          </label>
+        </div>
+        <div id="catalog-grid" class="catalog-grid"></div>
+      </section>
+
+      <!-- Estimator -->
+      <section id="tab-estimator" class="tab-panel" aria-label="Scope estimator">
+        <div class="panel" style="padding:1.35rem">
+          <div class="estimator-head">
+            <div>
+              <h2>Custom scope architect</h2>
+              <p>Pick a package preset or select modules. Then book a kickoff and send the brief.</p>
+            </div>
+            <button type="button" class="btn btn-ghost" id="clear-cart">Reset selection</button>
+          </div>
+          <div class="package-bar" id="package-bar-est" style="margin-bottom:1rem"></div>
+          <div class="estimator-layout">
+            <div>
+              <div class="service-cat" style="margin-bottom:0.65rem">Select modules</div>
+              <div id="estimator-list" class="estimator-list"></div>
+            </div>
+            <aside class="summary panel">
+              <h3>
+                Scope summary
+                <span class="pill" id="summary-count">0 selected</span>
+              </h3>
+              <div id="estimator-cart" class="cart-items">
+                <div class="cart-empty">No modules selected.</div>
+              </div>
+              <div class="summary-rows">
+                <div><span>Est. lead time</span><span id="est-time">—</span></div>
+                <div><span>Delivery model</span><span>Scoped SOW</span></div>
+                <div class="total"><span>Estimated total</span><span id="est-total">$0</span></div>
+              </div>
+              <button type="button" class="btn btn-primary" id="btn-estimator-proceed" disabled>
+                Proceed to book scope
+              </button>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ops demo — only when ?ops=1 -->
+      <section id="tab-ops" class="tab-panel" aria-label="Demo pipeline" hidden>
+        <div class="ops-note">
+          Internal demo only — sample pipeline rows. Not a live client CRM.
+          Return to <button type="button" class="btn btn-ghost" data-tab="catalog" style="display:inline;padding:0.2rem 0.45rem">Services</button>.
+        </div>
+        <div class="panel ops-table-wrap">
+          <table class="ops-table">
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Scope</th>
+                <th>Status</th>
+                <th>Value</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="ops-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div>
+          <div>T3kNo-Logic Solutions © 2026 · Robert Schneider</div>
+          <div class="ai-note">
+            Agent-assisted tooling may be used on scoped builds. Platform AI disclosure:
+            <a href="https://u2jsa-baaaa-aaaau-aghea-cai.icp0.io/legal/ai" rel="noopener noreferrer">Bonsai Registry · AI transparency</a>.
+          </div>
+        </div>
+        <div class="footer-links">
+          <a href="https://bonsaios.app/" rel="noopener noreferrer">Bonsai OS</a>
+          <a href="https://t3kno-logic.xyz/" rel="noopener noreferrer">Merch bazaar</a>
+          <a href="https://7h6n6-eqaaa-aaaau-ag6da-cai.icp0.io/" rel="noopener noreferrer">Canopy wallet</a>
+          <a href="https://thenftmatrix.gumroad.com/" rel="noopener noreferrer">Gumroad</a>
+          <a href="mailto:t3k@t3kno-logic.xyz" id="footer-mail">Email <span id="contact-email-display">t3k@t3kno-logic.xyz</span></a>
+          <a href="tel:+19092765764" id="footer-phone">Call <span id="contact-phone-display">(909) 276-5764</span></a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Book-a-scope modal -->
+  <div class="modal-backdrop no-print" id="book-modal" role="dialog" aria-modal="true" aria-labelledby="book-title">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <h3 id="book-title">Book a scope</h3>
+          <p>Step <span id="book-step-num">1</span> of 3 · estimate only — no auto-charge</p>
+        </div>
+        <button type="button" class="icon-btn" id="close-book" aria-label="Close">×</button>
+      </div>
+      <div class="progress"><span id="book-progress"></span></div>
+      <div class="modal-body">
+        <div class="step is-active" id="book-step-1">
+          <h4>Review selected modules</h4>
+          <p>Confirm the stack before contact details.</p>
+          <div id="book-scope-list" class="scope-list"></div>
+          <div class="scope-total">
+            <span>Estimated total</span>
+            <strong id="book-total">$0</strong>
+          </div>
+          <div class="modal-actions" style="border:none;padding-top:0;margin-top:0">
+            <span></span>
+            <button type="button" class="btn btn-primary" id="book-to-2">Continue →</button>
+          </div>
+        </div>
+
+        <div class="step" id="book-step-2">
+          <h4>Contact &amp; context</h4>
+          <p>Used to reply with an SOW. Optional principal for ICP scopes (copy from Canopy).</p>
+          <div class="form-grid two">
+            <div>
+              <label for="ob-name">Full name *</label>
+              <input type="text" id="ob-name" required autocomplete="name" placeholder="Alex Mercer" />
+            </div>
+            <div>
+              <label for="ob-email">Business email *</label>
+              <input type="email" id="ob-email" required autocomplete="email" placeholder="alex@protocol.io" />
+            </div>
+            <div>
+              <label for="ob-company">Company / project</label>
+              <input type="text" id="ob-company" autocomplete="organization" placeholder="Aegis Cyberworks" />
+            </div>
+            <div>
+              <label for="ob-principal">Canopy / II principal (optional)</label>
+              <input type="text" id="ob-principal" placeholder="aaaaa-aa…" spellcheck="false" />
+            </div>
+          </div>
+          <div style="margin-top:0.85rem">
+            <label for="ob-notes">Notes / repo links</label>
+            <textarea id="ob-notes" rows="3" placeholder="Stack prefs, deadlines, GitHub links…"></textarea>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn" id="book-back-1">← Back</button>
+            <button type="button" class="btn btn-primary" id="book-to-3">Continue →</button>
+          </div>
+        </div>
+
+        <div class="step" id="book-step-3">
+          <h4>Kickoff &amp; send brief</h4>
+          <p id="book-step3-copy">Pick a window, then send the brief. Optional discovery retainer is offered after — never auto-charged here.</p>
+
+          <div id="calendly-block" class="calendly-block" hidden>
+            <a class="btn btn-primary" id="calendly-link" href="#" target="_blank" rel="noopener noreferrer">Open Calendly to book</a>
+            <p class="hint">Opens in a new tab. Come back here to send the brief.</p>
+          </div>
+
+          <div id="slot-fallback" class="form-grid two">
+            <div>
+              <label for="ob-date">Target start date</label>
+              <input type="date" id="ob-date" />
+            </div>
+            <div>
+              <label>Preferred slot (UTC)</label>
+              <div id="time-slots" class="slots"></div>
+            </div>
+          </div>
+
+          <div id="book-done" class="done-panel" hidden style="margin-top:1rem">
+            <p>Brief handled. If mail did not open, send the file to <code id="done-email"></code>.</p>
+            <div id="deposit-cta" class="deposit-cta" hidden>
+              <p><strong>Optional discovery retainer</strong> (~$<span id="deposit-amount">250</span>) — locks a kickoff slot. Card via Stripe when configured; ICP context via Canopy.</p>
+              <div class="submit-actions">
+                <a class="btn btn-primary" id="deposit-stripe" href="#" target="_blank" rel="noopener noreferrer" hidden>Pay retainer (Stripe)</a>
+                <a class="btn" id="deposit-canopy" href="https://7h6n6-eqaaa-aaaau-ag6da-cai.icp0.io/" target="_blank" rel="noopener noreferrer">Open Canopy</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="btn" id="book-back-2">← Back</button>
+            <div class="submit-actions">
+              <button type="button" class="btn" id="book-copy">Copy brief</button>
+              <button type="button" class="btn" id="book-download">Download .txt</button>
+              <button type="button" class="btn" id="book-pdf">Print / PDF</button>
+              <button type="button" class="btn btn-primary" id="book-submit">Send brief</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Print / PDF brief (shown only when printing) -->
+  <div id="print-brief" class="print-only" aria-hidden="true"></div>
+
+  <script src="config.js"></script>
+  <script src="data/services.js"></script>
+  <script src="data/packages.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
