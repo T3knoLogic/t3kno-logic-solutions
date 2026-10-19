@@ -7,17 +7,40 @@
   <title>T3kNo-Logic Solutions</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="bridge">
+  <div class="fx-root" aria-hidden="true">
+    <div class="fx-stars" data-parallax="4"></div>
+    <img class="fx-atmosphere" data-parallax="12" src="assets/atmosphere.svg" alt="" />
+    <div class="fx-grid" data-parallax="2"></div>
+    <div class="fx-noise"></div>
+    <div class="fx-vignette"></div>
+    <div class="fx-scan"></div>
+  </div>
+
   <div id="toast-container" aria-live="polite"></div>
 
   <div class="shell no-print">
     <header class="site-header">
+      <div class="lcars-rail" aria-hidden="true">
+        <span class="lcars-block gold"></span>
+        <span class="lcars-block green long"></span>
+        <span class="lcars-block amber"></span>
+        <span class="lcars-elbow"></span>
+      </div>
       <div class="wrap header-inner">
         <button type="button" class="brand" id="brand-btn" aria-label="T3kNo-Logic Solutions home">
-          <span class="brand-mark" aria-hidden="true">&gt;_</span>
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40" width="28" height="28" fill="none">
+              <path d="M20 34 C19 26 16 22 12 16 C9 12 10 8 13 5" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M20 34 C21 26 24 22 28 16 C31 12 30 8 27 5" stroke="currentColor" stroke-width="1.6"/>
+              <circle cx="13" cy="5" r="1.6" fill="currentColor"/>
+              <circle cx="27" cy="5" r="1.6" fill="currentColor"/>
+              <path d="M8 22 H32" stroke="currentColor" stroke-width="1" opacity="0.45"/>
+            </svg>
+          </span>
           <span>
             <span class="brand-name">T3kNo-Logic Solutions</span>
-            <span class="brand-sub">Robert Schneider · scoped builds</span>
+            <span class="brand-sub">Bridge · Robert Schneider · scoped builds</span>
           </span>
         </button>
 
@@ -40,8 +63,21 @@
     </header>
 
     <section class="hero">
-      <div class="wrap">
+      <div class="hero-frame" aria-hidden="true">
+        <svg class="hero-corners" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <path d="M0 18 H12 L18 12 H0 Z" fill="currentColor"/>
+          <path d="M100 18 H88 L82 12 H100 Z" fill="currentColor"/>
+          <path d="M0 82 H12 L18 88 H0 Z" fill="currentColor"/>
+          <path d="M100 82 H88 L82 88 H100 Z" fill="currentColor"/>
+        </svg>
+        <div class="hero-hud-line"></div>
+      </div>
+      <div class="wrap hero-layout">
         <div class="hero-inner">
+          <div class="hero-status">
+            <span class="status-pip"></span>
+            CHANNEL OPEN · CYBER BONSAI BRIDGE
+          </div>
           <h1 class="hero-brand">
             <span>Freelance engineering desk</span>
             T3kNo-Logic Solutions
@@ -57,6 +93,33 @@
             <button type="button" class="btn" id="cta-estimator">Build a custom scope</button>
           </div>
         </div>
+        <aside class="hero-plate" aria-hidden="true">
+          <div class="plate-label">SYS // GROVE</div>
+          <svg class="plate-bonsai" viewBox="0 0 200 220" fill="none">
+            <defs>
+              <linearGradient id="trunk" x1="100" y1="220" x2="100" y2="80">
+                <stop stop-color="#c9a227" stop-opacity="0.9"/>
+                <stop offset="1" stop-color="#3ddc97" stop-opacity="0.5"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="100" cy="70" rx="72" ry="38" stroke="#3ddc97" stroke-opacity="0.5" fill="rgba(61,220,151,0.06)"/>
+            <ellipse cx="55" cy="55" rx="42" ry="26" stroke="#c9a227" stroke-opacity="0.35" fill="rgba(201,162,39,0.05)"/>
+            <ellipse cx="145" cy="52" rx="44" ry="28" stroke="#3ddc97" stroke-opacity="0.4" fill="rgba(61,220,151,0.05)"/>
+            <path d="M100 200 C98 150 90 130 70 95 C58 78 62 60 78 48" stroke="url(#trunk)" stroke-width="3"/>
+            <path d="M100 200 C102 148 118 128 140 92 C152 74 148 56 132 46" stroke="url(#trunk)" stroke-width="2.4"/>
+            <path d="M20 200 H180" stroke="#3ddc97" stroke-opacity="0.25"/>
+            <circle cx="78" cy="48" r="3" fill="#3ddc97"/>
+            <circle cx="132" cy="46" r="3" fill="#c9a227"/>
+            <g class="plate-orbit" stroke="#3ddc97" stroke-opacity="0.3">
+              <ellipse cx="100" cy="100" rx="88" ry="28"/>
+            </g>
+          </svg>
+          <div class="plate-readout">
+            <span>DEPTH 3</span>
+            <span>VEINS SYNC</span>
+            <span>READY</span>
+          </div>
+        </aside>
       </div>
     </section>
 
@@ -300,5 +363,6 @@
   <script src="data/services.js"></script>
   <script src="data/packages.js"></script>
   <script src="app.js"></script>
+  <script src="fx.js"></script>
 </body>
 </html>
