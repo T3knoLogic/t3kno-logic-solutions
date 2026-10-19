@@ -1,8 +1,12 @@
 # T3kNo-Logic Solutions — public sales desk
 
+**Live:** https://t3knologic.github.io/t3kno-logic-solutions/
+
 Static catalog + package presets + scope estimator + book-a-scope lead flow (Robert Schneider / T3kNo-Logic).
 
 **Not** Bonsai OS Hub, **not** the merch store at [t3kno-logic.xyz](https://t3kno-logic.xyz/), **not** a live CRM.
+
+Repo: https://github.com/T3knoLogic/t3kno-logic-solutions
 
 ## Contact
 

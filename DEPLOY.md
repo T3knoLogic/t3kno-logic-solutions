@@ -2,7 +2,18 @@
 
 Static site — no build step. Fill integrations in `config.local.js` first (see README).
 
-## Cloudflare Pages (recommended)
+## Live (shipped)
+
+| Host | URL |
+|------|-----|
+| **GitHub Pages** | https://t3knologic.github.io/t3kno-logic-solutions/ |
+| Repo | https://github.com/T3knoLogic/t3kno-logic-solutions |
+
+Push to `main` redeploys Pages automatically.
+
+Cloudflare/Netlify tokens were **not** in `REPOSITORIES/.env.local` and Wrangler was logged out — paste `CLOUDFLARE_API_TOKEN` + account id (or `NETLIFY_AUTH_TOKEN`) into Desktop `T3kNo-ENV-paste.txt` if you want those hosts instead.
+
+## Cloudflare Pages (optional)
 
 1. Push this folder (or monorepo) to GitHub.
 2. Cloudflare Dashboard → Workers & Pages → Create → Pages → Connect repo.
