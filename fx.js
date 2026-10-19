@@ -15,7 +15,8 @@
     root.style.setProperty('--my', y.toFixed(3));
     layers().forEach((el) => {
       const d = Number(el.getAttribute('data-parallax')) || 8;
-      el.style.transform = `translate3d(${x * d}px, ${y * d}px, 0)`;
+      // Keep atmosphere plate's CSS drift if present — only nudge translate
+      el.style.translate = `${(x * d).toFixed(1)}px ${(y * d).toFixed(1)}px`;
     });
   }
 

@@ -1,18 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" fill="none" aria-hidden="true">
   <defs>
     <radialGradient id="nebula" cx="20%" cy="10%" r="55%">
-      <stop offset="0%" stop-color="#3ddc97" stop-opacity="0.22"/>
-      <stop offset="45%" stop-color="#1a4a38" stop-opacity="0.12"/>
-      <stop offset="100%" stop-color="#0a0e0c" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#5ecf8a" stop-opacity="0.28"/>
+      <stop offset="45%" stop-color="#2d6b4a" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#020504" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="nebula2" cx="85%" cy="20%" r="40%">
-      <stop offset="0%" stop-color="#c9a227" stop-opacity="0.14"/>
-      <stop offset="100%" stop-color="#0a0e0c" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#b4c85a" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#020504" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="vein" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#3ddc97" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#3ddc97" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#c9a227" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#5ecf8a" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#5ecf8a" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#c5e8a8" stop-opacity="0"/>
     </linearGradient>
   </defs>
   <rect width="1440" height="900" fill="url(#nebula)"/>

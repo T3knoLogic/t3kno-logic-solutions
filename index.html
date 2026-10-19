@@ -5,32 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="T3kNo-Logic Solutions — scoped freelance engineering across ICP, Hedera, Shopify, Eliza agents, and creative tech. Catalog, estimate, book a scope." />
   <title>T3kNo-Logic Solutions</title>
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=dm-sans:400,500,600,700|fraunces:500,600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="bridge">
+  <!-- Atmosphere stack mirrors Canopy / Bonsai Cloud (CSS only — no WebGL) -->
   <div class="fx-root" aria-hidden="true">
-    <div class="fx-stars" data-parallax="4"></div>
-    <img class="fx-atmosphere" data-parallax="12" src="assets/atmosphere.svg" alt="" />
-    <div class="fx-grid" data-parallax="2"></div>
+    <div class="fx-base"></div>
+    <img class="fx-atmosphere" data-parallax="10" src="assets/atmosphere.svg" alt="" />
+    <div class="fx-mesh" data-parallax="4"></div>
     <div class="fx-noise"></div>
     <div class="fx-vignette"></div>
-    <div class="fx-scan"></div>
+    <div class="fx-hairline"></div>
   </div>
 
   <div id="toast-container" aria-live="polite"></div>
 
   <div class="shell no-print">
     <header class="site-header">
-      <div class="lcars-rail" aria-hidden="true">
-        <span class="lcars-block gold"></span>
-        <span class="lcars-block green long"></span>
-        <span class="lcars-block amber"></span>
-        <span class="lcars-elbow"></span>
-      </div>
       <div class="wrap header-inner">
         <button type="button" class="brand" id="brand-btn" aria-label="T3kNo-Logic Solutions home">
           <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 40 40" width="28" height="28" fill="none">
+            <svg viewBox="0 0 40 40" width="26" height="26" fill="none">
               <path d="M20 34 C19 26 16 22 12 16 C9 12 10 8 13 5" stroke="currentColor" stroke-width="1.6"/>
               <path d="M20 34 C21 26 24 22 28 16 C31 12 30 8 27 5" stroke="currentColor" stroke-width="1.6"/>
               <circle cx="13" cy="5" r="1.6" fill="currentColor"/>
@@ -40,7 +37,7 @@
           </span>
           <span>
             <span class="brand-name">T3kNo-Logic Solutions</span>
-            <span class="brand-sub">Bridge · Robert Schneider · scoped builds</span>
+            <span class="brand-sub">Bonsai OS · Robert Schneider · scoped builds</span>
           </span>
         </button>
 
@@ -63,30 +60,22 @@
     </header>
 
     <section class="hero">
-      <div class="hero-frame" aria-hidden="true">
-        <svg class="hero-corners" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <path d="M0 18 H12 L18 12 H0 Z" fill="currentColor"/>
-          <path d="M100 18 H88 L82 12 H100 Z" fill="currentColor"/>
-          <path d="M0 82 H12 L18 88 H0 Z" fill="currentColor"/>
-          <path d="M100 82 H88 L82 88 H100 Z" fill="currentColor"/>
-        </svg>
-        <div class="hero-hud-line"></div>
-      </div>
       <div class="wrap hero-layout">
         <div class="hero-inner">
           <div class="hero-status">
             <span class="status-pip"></span>
-            CHANNEL OPEN · CYBER BONSAI BRIDGE
+            Bonsai OS · Freelance engineering desk
           </div>
           <h1 class="hero-brand">
-            <span>Freelance engineering desk</span>
+            <span>Scoped builds for the grove</span>
             T3kNo-Logic Solutions
           </h1>
           <p class="hero-line">Precision scopes for Web3, agents, commerce, and creative systems.</p>
           <p class="hero-support">
             Packaged modules across ICP canisters, Hedera HTS, Shopify ops, ElizaOS agents, NFT pipelines, and audio —
             estimate a stack, then send a brief. Not a product storefront; for Bonsai OS apps see
-            <a href="https://bonsaios.app/" rel="noopener noreferrer">bonsaios.app</a>.
+            <a href="https://bonsaios.app/" rel="noopener noreferrer">bonsaios.app</a>
+            · wallet <a href="https://7h6n6-eqaaa-aaaau-ag6da-cai.icp0.io/" rel="noopener noreferrer">Canopy</a>.
           </p>
           <div class="hero-ctas">
             <button type="button" class="btn btn-primary" id="cta-catalog">Browse services</button>
@@ -94,23 +83,23 @@
           </div>
         </div>
         <aside class="hero-plate" aria-hidden="true">
-          <div class="plate-label">SYS // GROVE</div>
+          <div class="plate-label">Grove signal</div>
           <svg class="plate-bonsai" viewBox="0 0 200 220" fill="none">
             <defs>
               <linearGradient id="trunk" x1="100" y1="220" x2="100" y2="80">
-                <stop stop-color="#c9a227" stop-opacity="0.9"/>
-                <stop offset="1" stop-color="#3ddc97" stop-opacity="0.5"/>
+                <stop stop-color="#5ecf8a" stop-opacity="0.95"/>
+                <stop offset="1" stop-color="#2d6b4a" stop-opacity="0.55"/>
               </linearGradient>
             </defs>
-            <ellipse cx="100" cy="70" rx="72" ry="38" stroke="#3ddc97" stroke-opacity="0.5" fill="rgba(61,220,151,0.06)"/>
-            <ellipse cx="55" cy="55" rx="42" ry="26" stroke="#c9a227" stroke-opacity="0.35" fill="rgba(201,162,39,0.05)"/>
-            <ellipse cx="145" cy="52" rx="44" ry="28" stroke="#3ddc97" stroke-opacity="0.4" fill="rgba(61,220,151,0.05)"/>
+            <ellipse cx="100" cy="70" rx="72" ry="38" stroke="#5ecf8a" stroke-opacity="0.45" fill="rgba(94,207,138,0.06)"/>
+            <ellipse cx="55" cy="55" rx="42" ry="26" stroke="#c5e8a8" stroke-opacity="0.3" fill="rgba(197,232,168,0.05)"/>
+            <ellipse cx="145" cy="52" rx="44" ry="28" stroke="#5ecf8a" stroke-opacity="0.35" fill="rgba(94,207,138,0.05)"/>
             <path d="M100 200 C98 150 90 130 70 95 C58 78 62 60 78 48" stroke="url(#trunk)" stroke-width="3"/>
             <path d="M100 200 C102 148 118 128 140 92 C152 74 148 56 132 46" stroke="url(#trunk)" stroke-width="2.4"/>
-            <path d="M20 200 H180" stroke="#3ddc97" stroke-opacity="0.25"/>
-            <circle cx="78" cy="48" r="3" fill="#3ddc97"/>
-            <circle cx="132" cy="46" r="3" fill="#c9a227"/>
-            <g class="plate-orbit" stroke="#3ddc97" stroke-opacity="0.3">
+            <path d="M20 200 H180" stroke="#5ecf8a" stroke-opacity="0.22"/>
+            <circle cx="78" cy="48" r="3" fill="#5ecf8a"/>
+            <circle cx="132" cy="46" r="3" fill="#c5e8a8"/>
+            <g class="plate-orbit" stroke="#5ecf8a" stroke-opacity="0.28">
               <ellipse cx="100" cy="100" rx="88" ry="28"/>
             </g>
           </svg>
