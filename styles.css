@@ -238,9 +238,15 @@ button {
   .fx-hairline,
   .fx-atmosphere,
   .brand-mark,
-  .plate-orbit,
+  .plate-orbit {
+    animation: none !important;
+  }
+  /* Cards used opacity:0 + entrance animation — must force visible when motion is off */
   .service-card {
     animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
   }
 }
 
@@ -920,9 +926,16 @@ main {
   justify-content: space-between;
   padding: 1.2rem;
   transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
-  opacity: 0;
-  animation: card-in 0.55s ease forwards;
-  animation-delay: calc(var(--i, 0) * 45ms);
+  /* Visible by default; entrance animation only when motion is allowed */
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .service-card {
+    opacity: 0;
+    animation: card-in 0.55s ease forwards;
+    animation-delay: calc(var(--i, 0) * 45ms);
+  }
 }
 
 .service-card:hover {
