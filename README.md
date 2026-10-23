@@ -1,10 +1,11 @@
 # T3kNo-Logic Solutions — public sales desk
 
-**Live:** https://t3knologic.github.io/t3kno-logic-solutions/
+**Live (primary):** https://t3kno-logic.xyz/solutions/  
+**Mirror:** https://t3knologic.github.io/t3kno-logic-solutions/
 
 Static catalog + package presets + scope estimator + book-a-scope lead flow (Robert Schneider / T3kNo-Logic).
 
-**Not** Bonsai OS Hub, **not** the merch store at [t3kno-logic.xyz](https://t3kno-logic.xyz/), **not** a live CRM.
+Hosted as its own full-bleed section on the Enchanted Bonsai Bazaar Hydrogen storefront — **not** wired into Shopify checkout. **Not** Bonsai OS Hub, **not** a live CRM.
 
 Repo: https://github.com/T3knoLogic/t3kno-logic-solutions
 
@@ -53,7 +54,7 @@ Without Formspree, **Send brief** falls back to `mailto:`.
 
 ## Deploy
 
-See [`DEPLOY.md`](DEPLOY.md) — Cloudflare Pages or Netlify. ICP asset can later (ask before spending cycles).
+See [`DEPLOY.md`](DEPLOY.md) — primary ship is sync → Oxygen (`t3kno-bazaar-storefront`). GitHub Pages remains a mirror. ICP asset can later (ask before spending cycles).
 
 ## Edit catalog
 
