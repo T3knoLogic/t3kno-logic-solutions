@@ -22,8 +22,10 @@ window.T3KNO_CONFIG = Object.assign(
     STRIPE_BRIDGE_ORIGIN: 'https://stripe.bonsaios.app',
     STRIPE_DEPOSIT_PRODUCT: 'discovery_retainer',
     STRIPE_DEPOSIT_URL: '',
-    STRIPE_SUCCESS_URL: 'https://t3kno-logic.xyz/solutions/?stripe=retainer_success',
-    STRIPE_CANCEL_URL: 'https://t3kno-logic.xyz/solutions/?stripe=retainer_cancel',
+    STRIPE_SUCCESS_URL:
+      'https://t3kno-logic.xyz/solutions/index.html?stripe=retainer_success',
+    STRIPE_CANCEL_URL:
+      'https://t3kno-logic.xyz/solutions/index.html?stripe=retainer_cancel',
     DISCOVERY_RETAINER_USD: 250,
     CANOPY_URL: 'https://7h6n6-eqaaa-aaaau-ag6da-cai.icp0.io/',
 

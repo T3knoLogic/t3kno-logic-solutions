@@ -675,36 +675,57 @@
       return;
     }
 
-    // Primary send: Formspree when configured, always offer mailto fallback
+    // Primary send: Formspree when configured. Never navigate this document to
+    // mailto: (inside Oxygen iframes that yields Chrome "This content is blocked"
+    // and destroys the Stripe retainer CTA). Always reveal pay CTA after send.
     if (action === 'send') {
+      markDone();
+
       const fs = await postFormspree(brief, subject);
       if (fs.ok) {
-        showToast('Brief sent to the desk (Formspree).');
+        showToast('Brief sent to the desk. You can pay the optional retainer below.');
         track('BriefFormspree');
-      } else if (fs.skipped) {
-        const mailto =
-          'mailto:' +
-          encodeURIComponent(contactEmail()) +
-          '?subject=' +
-          encodeURIComponent(subject) +
-          '&body=' +
-          encodeURIComponent(brief);
-        window.location.href = mailto;
-        showToast('Opening email client…');
-        track('BriefMailto');
-      } else {
-        showToast('Formspree failed — falling back to email.');
-        const mailto =
-          'mailto:' +
-          encodeURIComponent(contactEmail()) +
-          '?subject=' +
-          encodeURIComponent(subject) +
-          '&body=' +
-          encodeURIComponent(brief);
-        window.location.href = mailto;
-        track('BriefMailtoFallback');
+        return;
       }
-      markDone();
+
+      try {
+        await navigator.clipboard.writeText(brief);
+      } catch (_) {
+        fallbackCopy(brief);
+      }
+
+      const mailto =
+        'mailto:' +
+        encodeURIComponent(contactEmail()) +
+        '?subject=' +
+        encodeURIComponent(subject) +
+        '&body=' +
+        encodeURIComponent(brief);
+
+      // Prefer a new top-level window so this desk page stays on-screen for Stripe.
+      let opened = false;
+      try {
+        const w = window.open(mailto, '_blank', 'noopener,noreferrer');
+        opened = Boolean(w);
+      } catch (_) {
+        opened = false;
+      }
+      if (!opened) {
+        const a = document.createElement('a');
+        a.href = mailto;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
+
+      showToast(
+        fs.skipped
+          ? 'Brief copied. Email opened if your mail app allows it — retainer pay is below.'
+          : 'Formspree failed; brief copied. Email the desk, then pay retainer below if ready.',
+      );
+      track(fs.skipped ? 'BriefMailto' : 'BriefMailtoFallback');
     }
   }
 
