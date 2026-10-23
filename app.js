@@ -494,37 +494,60 @@
       .join('\n');
   }
 
-  async function postFormspree(brief, subject) {
-    const id = (cfg().FORMSPREE_ID || '').trim();
-    if (!id) return { ok: false, skipped: true };
-
+  function buildLeadPayload(brief, subject) {
     const name = document.getElementById('ob-name').value.trim();
     const email = document.getElementById('ob-email').value.trim();
     const company = document.getElementById('ob-company').value.trim();
     const principal = document.getElementById('ob-principal').value.trim();
     const notes = document.getElementById('ob-notes').value.trim();
     const date = document.getElementById('ob-date').value;
+    return {
+      _subject: subject,
+      subject,
+      name,
+      email,
+      company,
+      principal,
+      notes,
+      kickoff: `${date} @ ${selectedSlot}`,
+      modules: pendingServices.map((s) => s.title).join('; '),
+      estimate: pendingServices.reduce((sum, s) => sum + s.price, 0),
+      brief,
+      phone_reply_to: contactPhoneDisplay(),
+    };
+  }
+
+  /** Prefer same-origin Hydrogen intake on t3kno-logic.xyz; Formspree as secondary. */
+  async function postLead(brief, subject) {
+    const payload = buildLeadPayload(brief, subject);
+
+    // 1) Same-origin API (works when desk is hosted under /solutions on Oxygen)
+    try {
+      const res = await fetch('/api/solutions-lead', {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (res.ok) {
+        const data = await res.json().catch(() => ({}));
+        return { ok: true, via: data.via || 'api', delivered: data.delivered !== false };
+      }
+    } catch (err) {
+      console.warn('solutions-lead api', err);
+    }
+
+    // 2) Direct Formspree when configured in config.js / config.local.js
+    const id = (cfg().FORMSPREE_ID || '').trim();
+    if (!id) return { ok: false, skipped: true };
 
     try {
       const res = await fetch(`https://formspree.io/f/${id}`, {
         method: 'POST',
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          _subject: subject,
-          name,
-          email,
-          company,
-          principal,
-          notes,
-          kickoff: `${date} @ ${selectedSlot}`,
-          modules: pendingServices.map((s) => s.title).join('; '),
-          estimate: pendingServices.reduce((sum, s) => sum + s.price, 0),
-          brief,
-          phone_reply_to: contactPhoneDisplay(),
-        }),
+        body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error('Formspree ' + res.status);
-      return { ok: true };
+      return { ok: true, via: 'formspree', delivered: true };
     } catch (err) {
       console.warn(err);
       return { ok: false, error: err };
@@ -681,10 +704,14 @@
     if (action === 'send') {
       markDone();
 
-      const fs = await postFormspree(brief, subject);
-      if (fs.ok) {
-        showToast('Brief sent to the desk. You can pay the optional retainer below.');
-        track('BriefFormspree');
+      const lead = await postLead(brief, subject);
+      if (lead.ok) {
+        showToast(
+          lead.delivered
+            ? 'Brief sent to the desk. Optional retainer pay is below.'
+            : 'Brief received. Optional retainer pay is below — also email t3k@t3kno-logic.xyz if you want a copy on file.',
+        );
+        track(lead.via === 'formspree' ? 'BriefFormspree' : 'BriefApi');
         return;
       }
 
@@ -721,11 +748,9 @@
       }
 
       showToast(
-        fs.skipped
-          ? 'Brief copied. Email opened if your mail app allows it — retainer pay is below.'
-          : 'Formspree failed; brief copied. Email the desk, then pay retainer below if ready.',
+        'Brief copied. Email opened if your mail app allows it — retainer pay is below.',
       );
-      track(fs.skipped ? 'BriefMailto' : 'BriefMailtoFallback');
+      track(lead.skipped ? 'BriefMailto' : 'BriefMailtoFallback');
     }
   }
 
