@@ -124,8 +124,9 @@ button {
   width: 108%;
   height: min(72vh, 720px);
   object-fit: cover;
-  object-position: center top;
-  opacity: 0.42;
+  object-position: center 35%;
+  opacity: 0.55;
+  filter: saturate(1.05) contrast(1.05);
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.55) 45%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.55) 45%, transparent 100%);
   will-change: transform;
@@ -238,8 +239,11 @@ button {
   .fx-hairline,
   .fx-atmosphere,
   .brand-mark,
-  .plate-orbit {
+  .plate-media {
     animation: none !important;
+  }
+  .proof-card:hover .proof-media img {
+    transform: none;
   }
   /* Cards used opacity:0 + entrance animation — must force visible when motion is off */
   .service-card {
@@ -301,6 +305,7 @@ button {
   width: 2.65rem;
   height: 2.65rem;
   border-radius: 12px;
+  overflow: hidden;
   background: linear-gradient(145deg, rgba(94, 207, 138, 0.16), rgba(4, 14, 10, 0.9));
   display: grid;
   place-items: center;
@@ -308,6 +313,13 @@ button {
   flex-shrink: 0;
   box-shadow: 0 0 0 1px rgba(94, 207, 138, 0.35), var(--glow-soft);
   animation: mark-pulse 4.2s ease-in-out infinite;
+}
+
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .brand-name {
@@ -564,7 +576,7 @@ button {
 
 .hero-plate {
   justify-self: center;
-  width: min(100%, 300px);
+  width: min(100%, 320px);
   padding: 1.15rem 1.2rem 1.25rem;
   animation: fade-up 0.75s 0.14s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -577,15 +589,33 @@ button {
   margin-bottom: 0.5rem;
 }
 
-.plate-bonsai {
-  width: 100%;
-  height: auto;
-  display: block;
+.plate-media {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  box-shadow:
+    inset 0 0 0 1px rgba(94, 207, 138, 0.28),
+    0 18px 40px rgba(0, 0, 0, 0.35);
+  animation: plate-drift 14s ease-in-out infinite;
 }
 
-.plate-orbit {
-  transform-origin: 100px 100px;
-  animation: orbit-spin 36s linear infinite;
+.plate-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+  transform: scale(1.04);
+}
+
+.plate-media-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, transparent 45%, rgba(2, 5, 4, 0.72) 100%),
+    radial-gradient(circle at 50% 20%, rgba(94, 207, 138, 0.12), transparent 55%);
 }
 
 .plate-readout {
@@ -728,7 +758,8 @@ main {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  padding: 1.1rem 1.15rem;
+  padding: 0;
+  overflow: hidden;
   color: var(--ink);
   text-decoration: none;
   transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
@@ -741,7 +772,42 @@ main {
   box-shadow: var(--shadow-glass), var(--glow-soft);
 }
 
+.proof-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: rgba(4, 14, 10, 0.85);
+}
+
+.proof-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.proof-card:hover .proof-media img {
+  transform: scale(1.04);
+}
+
+.proof-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 40%, rgba(2, 5, 4, 0.55) 100%);
+}
+
+.proof-kicker,
+.proof-card strong,
+.proof-card > span:last-child {
+  padding-inline: 1.1rem;
+}
+
 .proof-kicker {
+  margin-top: 0.85rem;
   font-family: var(--font-mono);
   font-size: 0.62rem;
   letter-spacing: 0.12em;
@@ -755,10 +821,11 @@ main {
   font-weight: 600;
 }
 
-.proof-card span:last-child {
+.proof-card > span:last-child {
   font-size: 0.85rem;
   color: var(--mist);
   line-height: 1.4;
+  padding-bottom: 1.1rem;
 }
 
 /* Packages */
