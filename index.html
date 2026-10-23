@@ -288,7 +288,7 @@
               <input type="text" id="ob-company" autocomplete="organization" placeholder="Aegis Cyberworks" />
             </div>
             <div>
-              <label for="ob-principal">Canopy / II principal (required for Stripe retainer)</label>
+              <label for="ob-principal">Canopy principal (optional — ICP scopes)</label>
               <input type="text" id="ob-principal" placeholder="aaaaa-aa…" spellcheck="false" autocomplete="off" />
             </div>
           </div>
@@ -325,8 +325,8 @@
           <div id="book-done" class="done-panel" hidden style="margin-top:1rem">
             <p>Brief handled. If mail did not open, send the file to <code id="done-email"></code>.</p>
             <div id="deposit-cta" class="deposit-cta" hidden>
-              <p><strong>Optional discovery retainer</strong> (~$<span id="deposit-amount">250</span>) — locks a kickoff slot. Card via Stripe (principal required); ICP context via Canopy.</p>
-              <p id="deposit-stripe-hint" class="hint" hidden>Paste your Canopy principal on the contact step to enable Pay retainer.</p>
+              <p><strong>Optional discovery retainer</strong> (~$<span id="deposit-amount">250</span>) — locks a kickoff slot. Pay by card via Stripe (no wallet required). Canopy is optional for ICP scopes.</p>
+              <p id="deposit-stripe-hint" class="hint" hidden></p>
               <div class="submit-actions">
                 <a class="btn btn-primary" id="deposit-stripe" href="#" target="_blank" rel="noopener noreferrer">Pay retainer (Stripe)</a>
                 <a class="btn" id="deposit-canopy" href="https://7h6n6-eqaaa-aaaau-ag6da-cai.icp0.io/" target="_blank" rel="noopener noreferrer">Open Canopy</a>

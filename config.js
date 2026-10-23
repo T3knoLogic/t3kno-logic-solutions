@@ -15,9 +15,9 @@ window.T3KNO_CONFIG = Object.assign(
     CALENDLY_URL: '',
 
     /**
-     * Discovery retainer ($250) via stripe.bonsaios.app software checkout.
-     * Leave STRIPE_DEPOSIT_URL empty to auto-build from principal + product.
-     * Override STRIPE_DEPOSIT_URL with a fixed Payment Link if preferred.
+     * Discovery retainer ($250) via existing stripe.bonsaios.app bridge.
+     * Card checkout does not require a Canopy principal (email is enough).
+     * Leave STRIPE_DEPOSIT_URL empty to auto-build; or set a fixed Payment Link.
      */
     STRIPE_BRIDGE_ORIGIN: 'https://stripe.bonsaios.app',
     STRIPE_DEPOSIT_PRODUCT: 'discovery_retainer',
