@@ -406,7 +406,8 @@ button {
   box-shadow: 0 0 20px rgba(94, 207, 138, 0.2);
 }
 
-.btn:disabled {
+.btn:disabled,
+.btn.is-disabled {
   opacity: 0.45;
   cursor: not-allowed;
 }

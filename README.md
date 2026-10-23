@@ -31,7 +31,9 @@ npx --yes serve .
 |-----|---------|
 | `FORMSPREE_ID` | Server-side lead capture (no mailto dependency) |
 | `CALENDLY_URL` | Real kickoff booking on step 3 |
-| `STRIPE_DEPOSIT_URL` | Optional discovery retainer Payment Link after brief |
+| `STRIPE_DEPOSIT_URL` | Optional fixed Payment Link; else auto `stripe.bonsaios.app/checkout?product=discovery_retainer` |
+| `STRIPE_BRIDGE_ORIGIN` | Default `https://stripe.bonsaios.app` |
+| `STRIPE_DEPOSIT_PRODUCT` | Default `discovery_retainer` ($250) |
 | `PLAUSIBLE_DOMAIN` | Privacy-friendly analytics once hosted |
 
 1. Copy [`config.local.example.js`](config.local.example.js) → `config.local.js`.

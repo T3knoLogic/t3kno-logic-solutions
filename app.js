@@ -531,6 +531,33 @@
     }
   }
 
+  function lookLikePrincipal(text) {
+    const t = String(text || '').trim();
+    return /^[a-z0-9-]{5,}$/i.test(t) && t.includes('-');
+  }
+
+  /** Stripe Checkout URL for discovery retainer (bridge SKU or fixed Payment Link). */
+  function buildStripeDepositUrl() {
+    const fixed = (cfg().STRIPE_DEPOSIT_URL || '').trim();
+    if (fixed) return fixed;
+
+    const principal = (document.getElementById('ob-principal')?.value || '').trim();
+    if (!lookLikePrincipal(principal)) return '';
+
+    const bridge = String(cfg().STRIPE_BRIDGE_ORIGIN || 'https://stripe.bonsaios.app').replace(/\/$/, '');
+    const product = cfg().STRIPE_DEPOSIT_PRODUCT || 'discovery_retainer';
+    const email = (document.getElementById('ob-email')?.value || '').trim();
+    const u = new URL(bridge + '/checkout');
+    u.searchParams.set('product', product);
+    u.searchParams.set('principal', principal);
+    if (email) u.searchParams.set('email', email);
+    const success = (cfg().STRIPE_SUCCESS_URL || '').trim();
+    const cancel = (cfg().STRIPE_CANCEL_URL || '').trim();
+    if (success) u.searchParams.set('success_url', success);
+    if (cancel) u.searchParams.set('cancel_url', cancel);
+    return u.toString();
+  }
+
   function showDepositCta() {
     const wrap = document.getElementById('deposit-cta');
     if (!wrap) return;
@@ -538,17 +565,59 @@
     const amt = document.getElementById('deposit-amount');
     if (amt) amt.textContent = String(cfg().DISCOVERY_RETAINER_USD || 250);
     const stripe = document.getElementById('deposit-stripe');
-    const stripeUrl = (cfg().STRIPE_DEPOSIT_URL || '').trim();
+    const stripeUrl = buildStripeDepositUrl();
+    const hint = document.getElementById('deposit-stripe-hint');
     if (stripe) {
+      stripe.hidden = false;
       if (stripeUrl) {
-        stripe.hidden = false;
         stripe.href = stripeUrl;
+        stripe.removeAttribute('aria-disabled');
+        stripe.classList.remove('is-disabled');
       } else {
-        stripe.hidden = true;
+        stripe.href = '#';
+        stripe.setAttribute('aria-disabled', 'true');
+        stripe.classList.add('is-disabled');
       }
+    }
+    if (hint) {
+      hint.hidden = Boolean(stripeUrl);
     }
     const canopy = document.getElementById('deposit-canopy');
     if (canopy) canopy.href = cfg().CANOPY_URL || 'https://7h6n6-eqaaa-aaaau-ag6da-cai.icp0.io/';
+  }
+
+  function onDepositStripeClick(e) {
+    track('DepositStripeClick');
+    const url = buildStripeDepositUrl();
+    if (url) {
+      // Refresh href in case principal was pasted after CTA appeared
+      const stripe = document.getElementById('deposit-stripe');
+      if (stripe) stripe.href = url;
+      return;
+    }
+    e.preventDefault();
+    showToast('Paste your Canopy / II principal above (required for Stripe checkout), then try again.');
+    document.getElementById('ob-principal')?.focus();
+    setBookStep(2);
+  }
+
+  function handleStripeReturnQuery() {
+    const q = new URLSearchParams(location.search).get('stripe');
+    if (!q) return;
+    if (q === 'retainer_success') {
+      showToast('Discovery retainer paid — thank you. We will confirm kickoff by email.');
+      track('DepositStripeSuccess');
+    } else if (q === 'retainer_cancel') {
+      showToast('Stripe checkout canceled — retainer not charged.');
+      track('DepositStripeCancel');
+    }
+    try {
+      const u = new URL(location.href);
+      u.searchParams.delete('stripe');
+      history.replaceState({}, '', u.pathname + u.search + u.hash);
+    } catch (_) {
+      /* ignore */
+    }
   }
 
   function markDone() {
@@ -822,9 +891,14 @@
     document.getElementById('book-pdf')?.addEventListener('click', () => submitLead('pdf'));
     document.getElementById('book-submit')?.addEventListener('click', () => submitLead('send'));
 
-    document.getElementById('deposit-stripe')?.addEventListener('click', () => track('DepositStripeClick'));
+    document.getElementById('deposit-stripe')?.addEventListener('click', onDepositStripeClick);
     document.getElementById('deposit-canopy')?.addEventListener('click', () => track('DepositCanopyClick'));
     document.getElementById('calendly-link')?.addEventListener('click', () => track('CalendlyClick'));
+    document.getElementById('ob-principal')?.addEventListener('input', () => {
+      if (lastBriefSent) showDepositCta();
+    });
+
+    handleStripeReturnQuery();
 
     if (opsEnabled() && location.hash === '#ops') switchTab('ops');
     else switchTab('catalog');
